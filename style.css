@@ -132,9 +132,12 @@ nav button {
 }
 
 #splash-inner p {
+  width: 600px;
+
   font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 400;
+  line-height: 175%;
   letter-spacing: 1.1px;
   color: #9e9aa7;
 }
@@ -250,4 +253,84 @@ nav button {
   height: 310px;
 
   background-color: #232027;
+}
+
+
+
+
+
+/* -------------------------- MEDIA QUERY <= 1300 -------------------------- */
+@media screen and (max-width: 1300px) {
+  #nav-inner {
+    margin-left: 8.625%;
+    margin-right: 8.625%;
+  }
+
+  /* #splash {
+    background-color: blue;
+  } */
+
+  #splash-inner {
+    margin: 0 8.625%;
+  }
+
+  #splash-inner h1 {
+    font-size: 68px;
+  }
+
+  #splash-inner p {
+    width: 400px;
+  }
+
+  #shorten {
+    width: 82.75%;
+  }
+
+  #shorten-inner {
+    left: 5.75%;
+    right: 5.75%;
+  }
+}
+
+
+
+@media screen and (max-width: 1100px) {
+  #splash-inner h1 {
+    font-size: 61px;
+  }
+
+  #splash-inner img {
+    right: -252px;
+
+    height: 386px;
+  }
+}
+
+
+
+@media screen and (max-width: 900px) {
+  #nav-inner {
+    margin-left: 5.75%;
+    margin-right: 5.75%;
+  }
+
+  nav p {
+    display: none;
+  }
+
+  #login-container {
+    display: none;
+  }
+
+  #splash {
+    background-color: red;
+  }
+
+  #splash-inner {
+    margin: 0 5.75%;
+  }
+
+  #shorten {
+    width: 88.5%;
+  }
 }
