@@ -34,18 +34,11 @@ nav {
 
   position: relative;
 
-  /* position: absolute; */
-  /* top: 48px; */
-
   width: 100%;
   max-width: 1440px;
-
   height: 40px;
-
-  /* margin-left: 11%;
-  margin-right: 11%; */
-  padding-left: 165px;
-  padding-right: 165px;
+  margin-left: 11.5%;
+  margin-right: 11.5%;
 
   /* border: 1px dashed black; */
 }
@@ -61,7 +54,6 @@ nav {
 
 nav p {
   display: inline;
-  /* align-self: flex-start; */
 
   margin-left: 30px;
 
@@ -81,8 +73,7 @@ nav p {
 
   position: absolute;
   top: 0;
-  right: 165px;
-  /* right: 0; */
+  right: 0;
 
   height: 100%;
 
@@ -91,8 +82,6 @@ nav p {
 
 #login {
   margin-right: 40px;
-
-  /* border: 1px dashed black; */
 }
 
 nav button {
@@ -108,56 +97,33 @@ nav button {
   font-size: 16px;
   font-weight: 500;
   color: white;
-
-  /* border: 1px dashed black; */
 }
 
-#splash-section-container {
+#splash {
   display: flex;
   justify-content: center;
+  align-items: center;
 
   position: relative;
 
   width: 100%;
   height: 800px;
 
-  background-color: blue;
-}
-
-#splash {
-  display: flex;
-  align-items: center;
-
-  /* justify-content: center; */
-
-  position: relative;
-
-  width: 100%;
-
-  max-width: 1440px;
-
-  height: 100%;
-  padding: 0 165px;
-  /* padding: 0 11%; */
-
   background-color: #ffffff;
-
   /* border: 1px dashed red; */
 }
 
 #splash-inner {
-  /* position: relative; */
+  position: relative;
 
   width: 100%;
-  /* max-width: 1440px; */
+  max-width: 1440px;
+  margin: 0 11.5%;
 
-  /* border: 1px dashed red; */
+  /* border: 1px dashed black; */
 }
 
 #splash-inner h1 {
-  /* position: absolute;
-  top: 200px; */
-
   font-family: "Poppins", sans-serif;
   font-size: 76px;
   font-weight: 700;
@@ -166,9 +132,6 @@ nav button {
 }
 
 #splash-inner p {
-  /* position: absolute;
-  top: 200px; */
-
   font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 400;
@@ -177,9 +140,6 @@ nav button {
 }
 
 #splash-inner button {
-  /* position: absolute;
-  top: 200px; */
-
   width: 195px;
   height: 55px;
   margin-top: 40px;
@@ -196,7 +156,7 @@ nav button {
 #splash-inner img {
   position: absolute;
   top: 50%;
-  right: -130px;
+  right: -296px;
 
   transform: translate(0, -50%);
 }
@@ -208,9 +168,9 @@ nav button {
 
   position: absolute;
   bottom: -84px;
-  left: 165px;
-  right: 165px;
 
+  width: 77%;
+  max-width: 1440px;
   height: 168px;
 
   background-color: #3a3053;
@@ -221,6 +181,8 @@ nav button {
   position: absolute;
   left: 64px;
   right: 64px;
+  /* left: 5.75%;
+  right: 5.75%; */
 
   height: 64px;
 
@@ -232,7 +194,8 @@ nav button {
   top: 0;
   left: 0;
 
-  width: 769px;
+  /* width: 769px; */
+  width: 78.4%;
   height: 100%;
   padding-left: 33px;
 
@@ -255,7 +218,8 @@ nav button {
   top: 0;
   right: 0;
 
-  width: 188px;
+  /* width: 188px; */
+  width: 19.2%;
   height: 100%;
 
   font-family: "Poppins", sans-serif;
