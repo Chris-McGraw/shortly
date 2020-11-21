@@ -107,7 +107,9 @@ nav button {
   position: relative;
 
   width: 100%;
-  height: 800px;
+  /* height: 800px; */
+  height: auto;
+  padding: 230.5px 0;
 
   background-color: #ffffff;
   /* border: 1px dashed red; */
@@ -295,6 +297,15 @@ nav button {
 
 
 @media screen and (max-width: 1100px) {
+  nav {
+    padding-top: 38px;
+    padding-bottom: 38px;
+  }
+
+  #splash {
+    padding: 184px 0;
+  }
+
   #splash-inner h1 {
     font-size: 61px;
   }
@@ -309,6 +320,11 @@ nav button {
 
 
 @media screen and (max-width: 900px) {
+  nav {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
   #nav-inner {
     margin-left: 5.75%;
     margin-right: 5.75%;
@@ -323,12 +339,32 @@ nav button {
   }
 
   #splash {
+    padding: 100px 0;
+
     background-color: red;
   }
 
   #splash-inner {
     margin: 0 5.75%;
   }
+
+  /* #splash-inner h1 {
+    font-size: 38px;
+  }
+
+  #splash-inner img {
+    position: relative;
+    top: auto;
+    right: auto;
+
+    height: 362px;
+
+    transform: none;
+  }
+
+  #splash-inner p {
+    font-size: 18px;
+  } */
 
   #shorten {
     width: 88.5%;
