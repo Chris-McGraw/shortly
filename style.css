@@ -19,7 +19,8 @@ nav {
   justify-content: center;
 
   z-index: 20;
-  position: fixed;
+  /* position: fixed; */
+  position: absolute;
   top: 0;
 
   width: 100%;
@@ -28,7 +29,7 @@ nav {
   padding-bottom: 48px;
 
   background-color: #ffffff;
-  border: 1px dashed red;
+  /* border: 1px dashed red; */
 }
 
 #nav-inner {
@@ -104,6 +105,46 @@ nav button {
 
 
 
+/* ----------------------- NAVBAR DROPDOWN NAVIGATION ----------------------- */
+#hamburger-container {
+  display: none;
+}
+
+#hamburger-menu {
+  position: absolute;
+
+  width: 25px;
+  height: 20px;
+
+  cursor: pointer;
+}
+
+/* @media (hover: hover) {
+  #hamburger-menu:hover .hamburger-bar {
+    background-color: #9b9b9b;
+  }
+} */
+
+.hamburger-bar {
+  position: relative;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background-color: #9e9aa7;
+  cursor: pointer;
+
+  transition: transform 300ms ease-in-out, width 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+
+.hamburger-bar-middle {
+  margin: 6px 0px;
+}
+
+
+
 /* ----------------------------- SPLASH SECTION ----------------------------- */
 #splash {
   display: flex;
@@ -131,7 +172,16 @@ nav button {
   /* border: 1px dashed black; */
 }
 
+#splash-text-container {
+  width: 100%;
+  height: 100%;
+
+  /* border: 1px dashed red; */
+}
+
 #splash-inner h1 {
+  width: 600px;
+
   font-family: "Poppins", sans-serif;
   font-size: 76px;
   font-weight: 700;
@@ -338,7 +388,7 @@ nav button {
   }
 
   #splash-inner h1 {
-    font-size: 68px;
+    font-size: 61px;
   }
 
   #splash-inner p {
@@ -352,6 +402,12 @@ nav button {
   #shorten-inner {
     left: 5.75%;
     right: 5.75%;
+  }
+
+/* ----- */
+
+  #stats-inner {
+    margin: 0 8.625%;
   }
 }
 
@@ -369,13 +425,38 @@ nav button {
   }
 
   #splash-inner h1 {
-    font-size: 61px;
+    width: 400px;
+    font-size: 49px;
   }
 
   #splash-inner img {
     right: -252px;
 
     height: 386px;
+  }
+
+  #splash-inner button {
+    margin-top: 35px;
+  }
+
+  #shorten {
+    bottom: -66px;
+
+    height: 132px;
+  }
+
+  #shorten-inner {
+    height: 56px;
+  }
+
+/* ----- */
+
+  #stats {
+    padding-top: 160px;
+  }
+
+  #stats h2 {
+    font-size: 32px;
   }
 }
 
@@ -401,35 +482,167 @@ nav button {
     display: none;
   }
 
-  #splash {
-    padding: 100px 0;
+  #hamburger-container {
+    z-index: 30;
+    position: absolute;
+    right: 0;
 
-    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 25px;
+  }
+
+  #splash {
+    padding: 161px 0;
+
+    /* background-color: red; */
   }
 
   #splash-inner {
     margin: 0 5.75%;
   }
 
-  /* #splash-inner h1 {
-    font-size: 38px;
+  #splash-inner img {
+    right: -215px;
+
+    height: 337px;
+  }
+
+  #splash-inner h1 {
+    font-size: 40px;
+  }
+
+  #splash-inner p {
+    width: 330px;
+
+    font-size: 18px;
+    letter-spacing: initial;
+  }
+
+  #shorten {
+    bottom: -48px;
+
+    width: 88.5%;
+    height: 96px;
+  }
+
+  #shorten-inner {
+    height: 48px;
+  }
+
+  #shorten-input {
+    font-size: 18px;
+  }
+
+  #shorten-submit {
+    font-size: 18px;
+  }
+
+/* ----- */
+
+  #stats {
+    padding-top: 130px;
+  }
+
+  #stats-inner {
+    margin: 0 5.75%
+  }
+
+  #stats h2 {
+    font-size: 26px;
+  }
+
+  #stats p {
+    font-size: 16px;
+  }
+}
+
+
+
+/* --------------------------- MEDIA QUERY <= 700 --------------------------- */
+@media screen and (max-width: 700px) {
+  #splash {
+    padding: 100px 0;
+
+    /* background-color: red; */
+  }
+
+  #splash-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #splash-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   #splash-inner img {
     position: relative;
     top: auto;
-    right: auto;
+    left: 0;
+    right: 0;
 
-    height: 362px;
+    margin: auto;
 
     transform: none;
   }
 
+  #splash-inner h1 {
+    margin-top: 40px;
+
+    text-align: center;
+  }
+
   #splash-inner p {
-    font-size: 18px;
-  } */
+    margin-top: 10px;
+
+    text-align: center;
+  }
+
+  #splash-inner button {
+    margin-top: 30px;
+    margin-bottom: 60px;
+  }
 
   #shorten {
-    width: 88.5%;
+    bottom: -80px;
+
+    height: 160px;
+  }
+
+  #shorten-inner {
+    height: auto;
+  }
+
+  #shorten-input {
+    position: relative;
+
+    width: 100%;
+    height: 48px;
+  }
+
+  #shorten-submit {
+    position: relative;
+
+    width: 100%;
+    height: 48px;
+    margin-top: 16px;
+  }
+
+/* ----- */
+
+  #stats {
+    padding-top: 160px;
+  }
+
+  #stats p {
+    width: 300px;
+    padding-top: 22px;
   }
 }
