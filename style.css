@@ -536,6 +536,12 @@ nav button {
     /* background-color: red; */
   }
 
+  #splash-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   #splash-text-container {
     display: flex;
     flex-direction: column;
@@ -546,7 +552,9 @@ nav button {
     position: relative;
     top: auto;
     left: 0;
-    right: auto;
+    right: 0;
+
+    margin: auto;
 
     transform: none;
   }
