@@ -301,6 +301,7 @@ nav button {
 
   width: 100%;
   height: 909px;
+  /* height: auto; */
   padding-top: 210px;
 
   background-color: #f0f1f6;
@@ -317,6 +318,7 @@ nav button {
 
   width: 100%;
   max-width: 1440px;
+  height: 100%;
   margin: 0 11.5%;
 
   /* border: 1px dashed black; */
@@ -343,6 +345,98 @@ nav button {
   font-weight: 400;
   text-align: center;
   line-height: 175%;
+  color: #9e9aa7;
+
+  /* border: 1px dashed red; */
+}
+
+#stats-tiles-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 30px;
+
+  position: relative;
+
+  height: 265px;
+
+
+  width: 100%;
+  margin-top: 100px;
+
+  /* border: 1px dashed red; */
+}
+
+#stats-accent-line {
+  position: absolute;
+  /* top: 150px; */
+  top: 57.5%;
+
+  transform: translate(0, -57.5%);
+
+  width: 100%;
+  height: 8px;
+
+  background-color: #2acfcf;
+}
+
+.stats-tile {
+  display: flex;
+  flex-direction: column;
+  grid-column: span 1;
+
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  background-color: white;
+}
+
+#tile-2 {
+  top: 45px;
+}
+
+#tile-3 {
+  position: relative;
+  top: 90px;
+}
+
+.stats-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: -44px;
+
+  width: 88px;
+  height: 88px;
+
+  background-color: #34313d;
+  border-radius: 100%;
+}
+
+.stats-tile h3 {
+  position: relative;
+  top: 74px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #34313d;
+
+  /* border: 1px dashed red; */
+}
+
+#stats-tiles-container p {
+  position: relative;
+  top: 74px;
+
+  width: 99%;
+  padding-bottom: 104px;
+
+  font-size: 15px;
+  font-weight: 400;
+  text-align: left;
   color: #9e9aa7;
 
   /* border: 1px dashed red; */
@@ -409,6 +503,15 @@ nav button {
   #stats-inner {
     margin: 0 8.625%;
   }
+
+  #stats-tiles-container {
+    grid-column-gap: 2.75%;
+  }
+
+  .stats-tile {
+    padding-left: 8.65%;
+    padding-right: 8.65%;
+  }
 }
 
 
@@ -457,6 +560,10 @@ nav button {
 
   #stats h2 {
     font-size: 32px;
+  }
+
+  .stats-tile h3 {
+    width: 80%;
   }
 }
 
@@ -544,7 +651,9 @@ nav button {
 /* ----- */
 
   #stats {
+    height: auto;
     padding-top: 130px;
+    padding-bottom: 90px;
   }
 
   #stats-inner {
@@ -557,6 +666,55 @@ nav button {
 
   #stats p {
     font-size: 16px;
+  }
+
+  #stats-tiles-container {
+    grid-template-columns: none;
+    grid-column-gap: none;
+
+    position: relative;
+
+    height: auto;
+    width: 100%;
+    margin-top: 100px;
+  }
+
+  #stats-accent-line {
+    top: 0;
+    left: 0;
+    right: 0;
+
+    transform: none;
+
+    width: 8px;
+    height: 100%;
+    margin: auto;
+  }
+
+  .stats-tile {
+    align-items: center;
+  }
+
+  #tile-2 {
+    top: 0;
+    margin-top: 90px;
+    margin-bottom: 90px;
+  }
+
+  #tile-3 {
+    top: 0;
+  }
+
+  .stats-tile h3 {
+    width: 100%;
+
+    text-align: center;
+  }
+
+  #stats-tiles-container p {
+    width: 100% !important;
+
+    text-align: center;
   }
 }
 
