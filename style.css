@@ -433,10 +433,49 @@ nav button {
 
 /* ----------------------------- BOOST SECTION ----------------------------- */
 #boost {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 100%;
   height: 250px;
 
   background-color: #3a3053;
+}
+
+#boost-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 11.5%;
+
+  /* border: 1px dashed white; */
+}
+
+#boost-inner h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 100%;
+  text-align: center;
+  color: white;
+}
+
+#boost-inner button {
+  width: 195px;
+  height: 55px;
+  margin-top: 30px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+
+  background-color: #2acfcf;
+  border-radius: 30px;
 }
 
 
@@ -499,6 +538,12 @@ nav button {
     padding-left: 8.65%;
     padding-right: 8.65%;
   }
+
+/* ----- */
+
+  #boost-inner {
+    margin: 0 8.625%;
+  }
 }
 
 
@@ -552,6 +597,16 @@ nav button {
 
   .stats-tile h3 {
     width: 80%;
+  }
+
+/* ----- */
+
+  #boost {
+    height: 210px;
+  }
+
+  #boost-inner h2 {
+    font-size: 32px;
   }
 }
 
@@ -707,6 +762,20 @@ nav button {
     text-align: center;
 
     padding-top: 15px !important;
+  }
+
+/* ----- */
+
+  #boost {
+    height: 300px;
+  }
+
+  #boost-inner {
+    margin: 0 5.75%
+  }
+
+  #boost-inner h2 {
+    font-size: 26px;
   }
 }
 
