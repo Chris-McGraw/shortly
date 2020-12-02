@@ -717,6 +717,10 @@ nav button {
 
 /* ----- */
 
+  #footer {
+    padding: 63.75px 0;
+  }
+
   #footer-list-container {
     grid-column: span 4;
   }
@@ -900,10 +904,6 @@ nav button {
 
 /* ----- */
 
-  #footer {
-    padding: 55px 0;
-  }
-
   #footer-inner {
     margin: 0 5.75%;
   }
@@ -996,6 +996,10 @@ nav button {
   }
 
 /* ----- */
+
+  #footer {
+    padding: 55px 0;
+  }
 
   #footer-inner {
     display: flex;
