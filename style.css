@@ -490,16 +490,15 @@ nav button {
   position: relative;
 
   width: 100%;
-  /* height: 310px; */
-  padding: 55px 0;
+  padding: 72.5px 0;
 
   background-color: #232027;
 }
 
 #footer-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-flow: column;
 
   position: relative;
 
@@ -510,17 +509,31 @@ nav button {
   /* border: 1px dashed white; */
 }
 
-#footer-inner img {
+#footer-logo-container {
+  grid-column: span 2;
+
+  /* border: 1px dashed yellow; */
+}
+
+#footer-logo-container img {
   height: 34px;
 }
 
-.footer-list {
-  width: 100%;
-  margin-top: 45px;
-
-  text-align: center;
+#footer-list-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: column;
+  grid-column: span 3;
 
   /* border: 1px dashed yellow; */
+}
+
+.footer-list {
+  grid-column: span 1;
+
+  width: 100%;
+
+  /* border: 1px dashed red; */
 }
 
 .footer-list h4 {
@@ -547,12 +560,11 @@ nav button {
 
 #footer-social {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  grid-column: span 1;
 
   width: 100%;
   height: auto;
-
-  margin-top: 45px;
 
   /* border: 1px dashed yellow; */
 }
@@ -562,7 +574,7 @@ nav button {
   align-items: center;
 
   height: 24px;
-  margin-right: 24px;
+  margin-right: 13%;
 
   /* border: 1px dashed white; */
 }
@@ -632,6 +644,12 @@ nav button {
   #boost-inner {
     margin: 0 8.625%;
   }
+
+/* ----- */
+
+  #footer-inner {
+    margin: 0 8.625%;
+  }
 }
 
 
@@ -695,6 +713,20 @@ nav button {
 
   #boost-inner h2 {
     font-size: 32px;
+  }
+
+/* ----- */
+
+  #footer-list-container {
+    grid-column: span 4;
+  }
+
+  .footer-list {
+    text-align: center;
+  }
+
+  #footer-social {
+    display: none;
   }
 }
 
@@ -865,6 +897,16 @@ nav button {
   #boost-inner h2 {
     font-size: 26px;
   }
+
+/* ----- */
+
+  #footer {
+    padding: 55px 0;
+  }
+
+  #footer-inner {
+    margin: 0 5.75%;
+  }
 }
 
 
@@ -951,5 +993,44 @@ nav button {
   #stats p {
     width: 300px;
     padding-top: 22px;
+  }
+
+/* ----- */
+
+  #footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #footer-logo-container {
+    grid-column: auto;
+  }
+
+  #footer-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: auto;
+  }
+
+  .footer-list {
+    grid-column: auto;
+
+    margin-top: 45px;
+
+    text-align: center;
+  }
+
+  #footer-social {
+    display: flex;
+    justify-content: center;
+    grid-column: auto;
+
+    margin-top: 45px;
+  }
+
+  #footer-social li {
+    margin-right: 24px;
   }
 }
