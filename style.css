@@ -738,7 +738,9 @@ nav button {
   }
 
   #footer-social li {
-    margin-right: 24px;
+    /* margin-right: 24px; */
+
+    margin-right: 8.1%;
   }
 }
 
@@ -1043,5 +1045,9 @@ nav button {
     top: auto;
 
     margin-top: 45px;
+  }
+
+  #footer-social li {
+    margin-right: 24px;
   }
 }
