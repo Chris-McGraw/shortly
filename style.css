@@ -50,16 +50,20 @@ nav {
   /* border: 1px dashed black; */
 }
 
-#nav-inner img {
-  display: inline;
-
+#nav-logo-link {
   height: 34px;
   margin-top: 6px;
+}
+
+#nav-logo-link img {
+  display: inline;
+
+  height: 100%;
 
   /* border: 1px dashed red; */
 }
 
-nav p {
+.nav-text-link {
   display: inline;
 
   margin-left: 30px;
@@ -70,7 +74,7 @@ nav p {
   color: #9e9aa7;
 }
 
-#first {
+#nav-link-features {
   margin-left: 40px;
 }
 
@@ -91,8 +95,10 @@ nav p {
   margin-right: 40px;
 }
 
-nav button {
-  display: inline;
+#submit {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 
   width: 105px;
   height: 40px;
@@ -786,7 +792,7 @@ nav button {
     margin-right: 5.75%;
   }
 
-  nav p {
+  .nav-text-link {
     display: none;
   }
 
