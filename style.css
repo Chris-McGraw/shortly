@@ -203,7 +203,11 @@ nav button {
   color: #9e9aa7;
 }
 
-#splash-inner button {
+#splash-inner a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 195px;
   height: 55px;
   margin-top: 40px;
@@ -215,6 +219,8 @@ nav button {
 
   background-color: #2acfcf;
   border-radius: 30px;
+
+  cursor: pointer;
 }
 
 #splash-inner img {
@@ -698,7 +704,7 @@ nav button {
     height: 386px;
   }
 
-  #splash-inner button {
+  #splash-inner a {
     margin-top: 35px;
   }
 
@@ -986,7 +992,7 @@ nav button {
     text-align: center;
   }
 
-  #splash-inner button {
+  #splash-inner a {
     margin-top: 30px;
     margin-bottom: 70px;
   }
