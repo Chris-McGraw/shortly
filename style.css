@@ -245,8 +245,6 @@ nav button {
   position: absolute;
   left: 64px;
   right: 64px;
-  /* left: 5.75%;
-  right: 5.75%; */
 
   height: 64px;
 
@@ -261,7 +259,7 @@ nav button {
   /* width: 769px; */
   width: 78.4%;
   height: 100%;
-  padding-left: 33px;
+  padding: 0 33px;
 
   font-family: "Poppins", sans-serif;
   font-size: 20px;
@@ -270,6 +268,10 @@ nav button {
 
   background-color: white;
   border-radius: 10px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #shorten-input::placeholder {
@@ -293,6 +295,8 @@ nav button {
 
   background-color: #2acfcf;
   border-radius: 10px;
+
+  cursor: pointer;
 }
 
 
@@ -636,6 +640,10 @@ nav button {
   #shorten-inner {
     left: 5.75%;
     right: 5.75%;
+  }
+
+  #shorten-input {
+    padding: 0 3.35%;
   }
 
 /* ----- */
@@ -998,6 +1006,8 @@ nav button {
 
     width: 100%;
     height: 48px;
+
+    padding: 0 5%;
   }
 
   #shorten-submit {
