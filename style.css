@@ -467,7 +467,11 @@ nav button {
   color: white;
 }
 
-#boost-inner button {
+#boost-inner a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 195px;
   height: 55px;
   margin-top: 30px;
