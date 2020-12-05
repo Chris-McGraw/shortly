@@ -95,9 +95,7 @@ nav {
   margin-right: 40px;
 }
 
-#submit {
-  -webkit-appearance: none;
-  
+#sign-up {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -294,6 +292,10 @@ nav {
 }
 
 #shorten-submit {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
   position: absolute;
   top: 0;
   right: 0;
