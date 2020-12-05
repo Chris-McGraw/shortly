@@ -96,6 +96,8 @@ nav {
 }
 
 #submit {
+  -webkit-appearance: none;
+  
   display: inline-flex;
   justify-content: center;
   align-items: center;
