@@ -80,8 +80,8 @@ nav {
   margin-left: 30px;
 
   font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--neutral-grayish-violet);
 }
 
@@ -118,8 +118,8 @@ nav {
   border-radius: 20px;
 
   font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--main-white);
 }
 
@@ -139,11 +139,9 @@ nav {
   cursor: pointer;
 }
 
-/* @media (hover: hover) {
-  #hamburger-menu:hover .hamburger-bar {
-    background-color: #9b9b9b;
-  }
-} */
+#hamburger-menu:active .hamburger-bar {
+  background-color: var(--neutral-very-dark-violet);
+}
 
 .hamburger-bar {
   position: relative;
@@ -240,6 +238,10 @@ nav {
   cursor: pointer;
 }
 
+#splash-inner a:active {
+  background-color: #9ce2e2;
+}
+
 #splash-inner img {
   position: absolute;
   top: 50%;
@@ -324,6 +326,10 @@ nav {
   border-radius: 10px;
 
   cursor: pointer;
+}
+
+#shorten-submit:active {
+  background-color: #9ce2e2;
 }
 
 
@@ -628,12 +634,51 @@ nav {
   height: 24px;
 }
 
-#footer-social img {
+#footer-social li a img {
   width: 24px;
   height: auto;
 }
 
 
+
+
+
+/* -------------------------- MEDIA QUERY : HOVER -------------------------- */
+@media (hover: hover) {
+  .nav-text-link:hover {
+    color: var(--neutral-very-dark-violet);
+  }
+
+  #sign-up:hover {
+    background-color: #9ce2e2;
+  }
+
+  #hamburger-menu:hover .hamburger-bar {
+    background-color: var(--neutral-very-dark-violet);
+  }
+
+/* ----- */
+
+  #splash-inner a:hover {
+    background-color: #9ce2e2;
+  }
+
+  #shorten-submit:hover {
+    background-color: #9ce2e2;
+  }
+
+/* ----- */
+
+  #boost-inner a:hover {
+    background-color: #9ce2e2;
+  }
+
+/* ----- */
+
+  .footer-list li a:hover {
+    color: var(--main-cyan);
+  }
+}
 
 
 
@@ -884,7 +929,7 @@ nav {
   }
 
   #stats p {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   #stats-tiles-container {
