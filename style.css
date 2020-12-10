@@ -739,6 +739,18 @@ nav {
     background-color: var(--neutral-very-dark-violet);
   }
 
+  #dropdown-nav ul li a:hover {
+    color: var(--main-cyan);
+  }
+
+  #dropdown-sign-up:hover {
+    background-color: #9ce2e2;
+  }
+
+  #dropdown-sign-up a:hover {
+    color: var(--main-white) !important;
+  }
+
 /* ----- */
 
   #splash-inner a:hover {
