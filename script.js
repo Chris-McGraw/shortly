@@ -9,6 +9,48 @@ function toggleDropdownActive() {
   document.getElementById("dropdown-nav").classList.toggle("dropdown-active");
 }
 
+function createShortenResultTile() {
+  var shortenResultTile = document.createElement("DIV");
+  shortenResultTile.classList.add("shorten-result-tile");
+
+  var shortenResultTileInner = document.createElement("DIV");
+  shortenResultTileInner.classList.add("shorten-result-tile-inner");
+  shortenResultTile.appendChild(shortenResultTileInner);
+
+
+
+  var shortenResultOriginal = document.createElement("P");
+  shortenResultOriginal.classList.add("shorten-result-original");
+  shortenResultOriginal.appendChild( document.createTextNode("https://www.frontendmentor.io") );
+  shortenResultTileInner.appendChild(shortenResultOriginal);
+
+  var shortenResultLinkContainer = document.createElement("DIV");
+  shortenResultLinkContainer.classList.add("shorten-result-link-container");
+  shortenResultTileInner.appendChild(shortenResultLinkContainer);
+
+  var shortenResultLink = document.createElement("A");
+  shortenResultLink.classList.add("shorten-result-link");
+  shortenResultLink.appendChild( document.createTextNode("https://rel.ink/k4IKyk") );
+  shortenResultLinkContainer.appendChild(shortenResultLink);
+
+  var shortenResultCopyBtn = document.createElement("BUTTON");
+  shortenResultCopyBtn.classList.add("shorten-result-copy-btn");
+  shortenResultCopyBtn.appendChild( document.createTextNode("Copy") );
+  shortenResultLinkContainer.appendChild(shortenResultCopyBtn);
+
+
+
+  document.getElementById("shorten-results-container").prepend(shortenResultTile);
+
+  setTimeout(function() {
+    shortenResultTile.classList.add("shorten-result-tile-expand");
+  }, 0);
+
+  setTimeout(function() {
+    shortenResultTileInner.classList.add("shorten-result-tile-expand");
+  }, 300);
+}
+
 
 
 
@@ -48,6 +90,10 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("shorten-submit").addEventListener("mouseleave", function() {
     this.blur();
     this.style.outlineWidth = "initial";
+  });
+
+  document.getElementById("shorten-submit").addEventListener("click", function() {
+    createShortenResultTile();
   });
 
 /* ----- */
