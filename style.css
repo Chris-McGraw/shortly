@@ -452,6 +452,8 @@ nav {
 }
 
 .shorten-result-tile {
+  position: relative;
+
   width: 100%;
   height: 0px;
   padding: 0 25px;
@@ -459,12 +461,14 @@ nav {
 
   background-color: var(--main-white);
   border-radius: 5px;
-
-  transition: height 300ms ease-in;
 }
 
 .shorten-result-tile:nth-child(1) {
   margin-top: 25px;
+}
+
+.shorten-result-tile-transition {
+  transition: height 300ms ease-in;
 }
 
 .shorten-result-tile-expand {
@@ -496,6 +500,10 @@ nav {
   font-weight: 500 !important;
   text-align: left !important;
   color: var(--neutral-very-dark-violet) !important;
+}
+
+.shorten-result-accent-line {
+  display: none;
 }
 
 .shorten-result-link-container {
@@ -1131,36 +1139,73 @@ nav {
     margin-bottom: 82px;
   }
 
-  /* .shorten-result-tile-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
+  .shorten-result-tile {
+    padding: 0 16px;
+    margin-top: 25px;
+  }
 
-    position: relative;
+  .shorten-result-tile-expand {
+    height: 155px;
+  }
 
-    width: 100%;
-    height: 100%;
-
-    transition: opacity 300ms ease-in;
+  .shorten-result-tile-inner {
+    display: block;
   }
 
   .shorten-result-original {
-    position: relative;
+    left: auto;
+    top: 10px;
 
-    width: 100%;
+    width: 100% !important;
+
+    font-size: 15px !important;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    /* border: 1px dashed red; */
+  }
+
+  .shorten-result-accent-line {
+    display: block;
+    opacity: 0;
+
+    position: absolute;
+    left: 0;
+    top: 48px;
+
+    width: 100%;
+    height: 1px;
+
+    background-color: #9ce2e2;
+
+    transition: opacity 300ms ease-in;
   }
 
   .shorten-result-link-container {
-    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+
+    right: auto;
+    bottom: 15px;
 
     width: 100%;
-    height: 100%;
-  } */
+    height: auto;
+
+    /* border: 1px dashed blue; */
+  }
+
+  .shorten-result-link {
+    margin-right: 0;
+    margin-bottom: 12px;
+
+    font-size: 15px !important;
+  }
+
+  .shorten-result-copy-btn {
+    width: 100%;
+  }
 
 /* ----- */
 

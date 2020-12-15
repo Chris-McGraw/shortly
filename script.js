@@ -24,11 +24,17 @@ function createShortenResultTile() {
   shortenResultOriginal.appendChild( document.createTextNode("https://www.frontendmentor.io") );
   shortenResultTileInner.appendChild(shortenResultOriginal);
 
+  var shortenResultAccentLine = document.createElement("DIV");
+  shortenResultAccentLine.classList.add("shorten-result-accent-line");
+  shortenResultTile.appendChild(shortenResultAccentLine);
+
   var shortenResultLinkContainer = document.createElement("DIV");
   shortenResultLinkContainer.classList.add("shorten-result-link-container");
   shortenResultTileInner.appendChild(shortenResultLinkContainer);
 
   var shortenResultLink = document.createElement("A");
+  shortenResultLink.href = "https://rel.ink/k4IKyk";
+  shortenResultLink.setAttribute("target", "_blank");
   shortenResultLink.classList.add("shorten-result-link");
   shortenResultLink.appendChild( document.createTextNode("https://rel.ink/k4IKyk") );
   shortenResultLinkContainer.appendChild(shortenResultLink);
@@ -43,11 +49,14 @@ function createShortenResultTile() {
   document.getElementById("shorten-results-container").prepend(shortenResultTile);
 
   setTimeout(function() {
-    shortenResultTile.classList.add("shorten-result-tile-expand");
+    shortenResultTile.classList.add("shorten-result-tile-transition", "shorten-result-tile-expand");
   }, 0);
 
   setTimeout(function() {
+    shortenResultTile.classList.remove("shorten-result-tile-transition");
+
     shortenResultTileInner.classList.add("shorten-result-tile-expand");
+    shortenResultAccentLine.classList.add("shorten-result-tile-expand");
   }, 300);
 }
 
