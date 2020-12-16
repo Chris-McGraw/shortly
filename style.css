@@ -345,6 +345,10 @@ nav {
   height: 168px;
 
   background-color: var(--main-dark-violet);
+  background-image: url("imgs/bg-shorten-desktop.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 10px;
 }
 
@@ -630,6 +634,7 @@ nav {
   padding-right: 30px;
 
   background-color: var(--main-white);
+  border-radius: 5px;
 }
 
 #tile-2 {
@@ -1150,10 +1155,14 @@ nav {
 
   #shorten-input {
     font-size: 18px;
+
+    border-radius: 5px;
   }
 
   #shorten-submit {
     font-size: 18px;
+
+    border-radius: 5px;
   }
 
 /* ----- */
@@ -1371,6 +1380,10 @@ nav {
     bottom: -80px;
 
     height: 160px;
+
+    background-image: url("imgs/bg-shorten-mobile.svg");
+    background-position: top -30px right -45px;
+    background-size: contain;
   }
 
   #shorten-inner {
