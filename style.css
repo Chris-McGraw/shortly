@@ -692,6 +692,10 @@ nav {
   height: 250px;
 
   background-color: var(--main-dark-violet);
+  background-image: url("imgs/bg-boost-desktop.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #boost-inner {
@@ -1311,6 +1315,8 @@ nav {
 
   #boost {
     height: 300px;
+
+    background-image: url("imgs/bg-boost-mobile.svg");
   }
 
   #boost-inner {
@@ -1413,7 +1419,7 @@ nav {
     margin-bottom: 80px;
   }
 
-  /* ----- */
+/* ----- */
 
   #stats {
     padding-top: 80px;
