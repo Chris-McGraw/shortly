@@ -9,6 +9,7 @@ function toggleDropdownActive() {
   document.getElementById("dropdown-nav").classList.toggle("dropdown-active");
 }
 
+
 function createShortenResultTile() {
   var shortenResultTile = document.createElement("DIV");
   shortenResultTile.classList.add("shorten-result-tile");
@@ -17,7 +18,7 @@ function createShortenResultTile() {
   shortenResultTileInner.classList.add("shorten-result-tile-inner");
   shortenResultTile.appendChild(shortenResultTileInner);
 
-
+// --
 
   var shortenResultOriginal = document.createElement("P");
   shortenResultOriginal.classList.add("shorten-result-original");
@@ -48,7 +49,7 @@ function createShortenResultTile() {
   shortenResultCopyBtn.appendChild( document.createTextNode("Copy") );
   shortenResultLinkContainer.appendChild(shortenResultCopyBtn);
 
-
+// --
 
   document.getElementById("shorten-results-container").prepend(shortenResultTile);
 
@@ -63,6 +64,44 @@ function createShortenResultTile() {
     shortenResultAccentLine.classList.add("shorten-result-tile-expand");
   }, 300);
 }
+
+
+function checkValidUrl(str) {
+  regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+
+  if (regexp.test(str)) {
+    return true
+  }
+  else {
+    return false;
+  }
+}
+
+
+function validUrlPass() {
+  document.getElementById("shorten").classList.remove("shorten-link-error-shorten-expand");
+  document.getElementById("shorten-input").value = "";
+  document.getElementById("shorten-input").style.boxShadow = "none";
+  document.getElementById("shorten-link-error").classList.remove("shorten-link-error-display");
+
+  document.getElementById("stats").classList.remove("shorten-link-error-stats-expand");
+}
+
+
+function validUrlFail() {
+  document.getElementById("shorten").classList.add("shorten-link-error-shorten-expand");
+  document.getElementById("shorten-input").style.boxShadow = "0 0 0 3px hsl(0, 87%, 67%) inset";
+  document.getElementById("shorten-link-error").classList.add("shorten-link-error-display");
+
+  document.getElementById("stats").classList.add("shorten-link-error-stats-expand");
+}
+
+
+// function apiTest() {
+//   fetch("https://api.shrtco.de/v2/shorten?url=example.org/very/long/link.html")
+//   .then(response => response.json())
+//   .then(data => console.log(data));
+// }
 
 
 
@@ -106,7 +145,18 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   document.getElementById("shorten-submit").addEventListener("click", function() {
-    createShortenResultTile();
+    console.log( checkValidUrl(document.getElementById("shorten-input").value) );
+
+    if(checkValidUrl(document.getElementById("shorten-input").value) === true) {
+      validUrlPass();
+
+      // apiTest();
+
+      createShortenResultTile();
+    }
+    else {
+      validUrlFail();
+    }
   });
 
 /* ----- */
