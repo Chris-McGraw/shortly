@@ -1,16 +1,10 @@
-/* ------------------------- VARIABLE DECLARATIONS ------------------------- */
-
-
-
-
-
 /* ------------------------- FUNCTION DECLARATIONS ------------------------- */
 function toggleDropdownActive() {
   document.getElementById("dropdown-nav").classList.toggle("dropdown-active");
 }
 
 
-function createShortenResultTile() {
+function createShortenResultTile(apiUrl) {
   var shortenResultTile = document.createElement("DIV");
   shortenResultTile.classList.add("shorten-result-tile");
 
@@ -20,34 +14,7 @@ function createShortenResultTile() {
 
 // --
 
-  var shortenResultOriginal = document.createElement("P");
-  shortenResultOriginal.classList.add("shorten-result-original");
-  shortenResultOriginal.appendChild( document.createTextNode("https://www.frontendmentor.io") );
-  shortenResultTileInner.appendChild(shortenResultOriginal);
-
-  var shortenResultAccentLine = document.createElement("DIV");
-  shortenResultAccentLine.classList.add("shorten-result-accent-line");
-  shortenResultTile.appendChild(shortenResultAccentLine);
-
-  var shortenResultLinkContainer = document.createElement("DIV");
-  shortenResultLinkContainer.classList.add("shorten-result-link-container");
-  shortenResultTileInner.appendChild(shortenResultLinkContainer);
-
-  var shortenResultLinkContainerInner = document.createElement("DIV");
-  shortenResultLinkContainerInner.classList.add("shorten-result-link-container-inner");
-  shortenResultLinkContainer.appendChild(shortenResultLinkContainerInner);
-
-  var shortenResultLink = document.createElement("A");
-  shortenResultLink.href = "https://rel.ink/k4IKyk";
-  shortenResultLink.setAttribute("target", "_blank");
-  shortenResultLink.classList.add("shorten-result-link");
-  shortenResultLink.appendChild( document.createTextNode("https://rel.ink/k4IKyk") );
-  shortenResultLinkContainerInner.appendChild(shortenResultLink);
-
-  var shortenResultCopyBtn = document.createElement("BUTTON");
-  shortenResultCopyBtn.classList.add("shorten-result-copy-btn");
-  shortenResultCopyBtn.appendChild( document.createTextNode("Copy") );
-  shortenResultLinkContainer.appendChild(shortenResultCopyBtn);
+  fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl);
 
 // --
 
@@ -59,9 +26,93 @@ function createShortenResultTile() {
 
   setTimeout(function() {
     shortenResultTile.classList.remove("shorten-result-tile-transition");
+  }, 300);
+}
 
-    shortenResultTileInner.classList.add("shorten-result-tile-expand");
-    shortenResultAccentLine.classList.add("shorten-result-tile-expand");
+
+function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
+  var shortenResultLoadingSpinner = document.createElement("DIV");
+  shortenResultLoadingSpinner.classList.add("shorten-result-loading-spinner", "rotate-loading-spinner");
+
+  shortenResultTileInner.appendChild(shortenResultLoadingSpinner);
+
+  setTimeout(function() {
+    shortenResultLoadingSpinner.classList.add("shorten-result-fade-in");
+  }, 300);
+
+// --
+
+  let apiUrlEncoded = apiUrl.replace(/&/g, "%26");
+  console.log(apiUrlEncoded);
+
+  fetch("https://api.shrtco.de/v2/shorten?url=" + apiUrlEncoded)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
+
+    shortenResultLoadingSpinner.classList.remove("shorten-result-fade-in");
+    setTimeout(function() {
+      shortenResultLoadingSpinner.classList.remove("rotate-loading-spinner");
+      shortenResultLoadingSpinner.style.display = "none";
+    }, 300);
+
+// --
+
+    createShortenResultOriginal(shortenResultTileInner, data);
+    createShortenResultAccentLine(shortenResultTile);
+    createShortenResultLinkContainer(shortenResultTileInner, data);
+  });
+}
+
+
+function createShortenResultOriginal(shortenResultTileInner, data) {
+  var shortenResultOriginal = document.createElement("P");
+  shortenResultOriginal.classList.add("shorten-result-original");
+  shortenResultOriginal.appendChild( document.createTextNode(data.result.original_link) );
+  shortenResultTileInner.appendChild(shortenResultOriginal);
+
+  setTimeout(function() {
+    shortenResultOriginal.classList.add("shorten-result-fade-in");
+  }, 300);
+}
+
+
+function createShortenResultAccentLine(shortenResultTile) {
+  var shortenResultAccentLine = document.createElement("DIV");
+  shortenResultAccentLine.classList.add("shorten-result-accent-line");
+  shortenResultTile.appendChild(shortenResultAccentLine);
+
+  setTimeout(function() {
+    shortenResultAccentLine.classList.add("shorten-result-fade-in");
+  }, 300);
+}
+
+
+function createShortenResultLinkContainer(shortenResultTileInner, data) {
+  var shortenResultLinkContainer = document.createElement("DIV");
+  shortenResultLinkContainer.classList.add("shorten-result-link-container");
+  shortenResultTileInner.appendChild(shortenResultLinkContainer);
+
+  var shortenResultLinkContainerInner = document.createElement("DIV");
+  shortenResultLinkContainerInner.classList.add("shorten-result-link-container-inner");
+  shortenResultLinkContainer.appendChild(shortenResultLinkContainerInner);
+
+  var shortenResultLink = document.createElement("A");
+  shortenResultLink.href = data.result.full_short_link;
+  shortenResultLink.setAttribute("target", "_blank");
+  shortenResultLink.classList.add("shorten-result-link");
+  shortenResultLink.appendChild( document.createTextNode(data.result.full_short_link) );
+  shortenResultLinkContainerInner.appendChild(shortenResultLink);
+
+  var shortenResultCopyBtn = document.createElement("BUTTON");
+  shortenResultCopyBtn.classList.add("shorten-result-copy-btn");
+  shortenResultCopyBtn.appendChild( document.createTextNode("Copy") );
+  shortenResultLinkContainer.appendChild(shortenResultCopyBtn);
+
+  setTimeout(function() {
+    shortenResultLinkContainer.classList.add("shorten-result-fade-in");
   }, 300);
 }
 
@@ -95,13 +146,6 @@ function validUrlFail() {
 
   document.getElementById("stats").classList.add("shorten-link-error-stats-expand");
 }
-
-
-// function apiTest() {
-//   fetch("https://api.shrtco.de/v2/shorten?url=example.org/very/long/link.html")
-//   .then(response => response.json())
-//   .then(data => console.log(data));
-// }
 
 
 
@@ -148,11 +192,9 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log( checkValidUrl(document.getElementById("shorten-input").value) );
 
     if(checkValidUrl(document.getElementById("shorten-input").value) === true) {
+      createShortenResultTile(document.getElementById("shorten-input").value);
+
       validUrlPass();
-
-      // apiTest();
-
-      createShortenResultTile();
     }
     else {
       validUrlFail();
