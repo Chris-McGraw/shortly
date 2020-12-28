@@ -166,24 +166,28 @@ nav {
 }
 
 #dropdown-nav {
-  display: none;
+  display: block;
 
   z-index: 10;
+  position: fixed;
+  left: 5.75%;
+  right: 5.75%;
+  top: 100px;
 
-  position: absolute;
-  top: 0;
+  transform: translateY(-381px);
 
-  width: 100%;
+  width: auto;
   height: 381px;
   padding: 0 5.75%;
-  margin-top: 70px;
 
   background-color: var(--main-dark-violet);
   border-radius: 10px;
+
+  transition: transform 400ms ease-in-out;
 }
 
 .dropdown-active {
-  display: block !important;
+  transform: translateY(0px) !important;
 }
 
 #dropdown-nav ul {
