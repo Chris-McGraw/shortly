@@ -107,8 +107,31 @@ function createShortenResultLinkContainer(shortenResultTileInner, data) {
   shortenResultLinkContainerInner.appendChild(shortenResultLink);
 
   var shortenResultCopyBtn = document.createElement("BUTTON");
-  shortenResultCopyBtn.classList.add("shorten-result-copy-btn");
+  shortenResultCopyBtn.classList.add("shorten-result-copy-btn", "copy-btn-default");
   shortenResultCopyBtn.appendChild( document.createTextNode("Copy") );
+
+// --
+
+  shortenResultCopyBtn.addEventListener("mousedown", function() {
+    this.style.outlineWidth = "0";
+  });
+
+  shortenResultCopyBtn.addEventListener("mouseup", function() {
+    this.blur();
+    this.style.outlineWidth = "initial";
+  });
+
+  shortenResultCopyBtn.addEventListener("mouseleave", function() {
+    this.blur();
+    this.style.outlineWidth = "initial";
+  });
+
+  shortenResultCopyBtn.addEventListener("click", function() {
+    copyShortenedLink(this);
+  });
+
+// --
+
   shortenResultLinkContainer.appendChild(shortenResultCopyBtn);
 
   setTimeout(function() {
@@ -145,6 +168,32 @@ function validUrlFail() {
   document.getElementById("shorten-link-error").classList.add("shorten-link-error-display");
 
   document.getElementById("stats").classList.add("shorten-link-error-stats-expand");
+}
+
+
+function copyShortenedLink(btn) {
+  // console.log( btn.classList.contains("copy-btn-copied") );
+
+  if(btn.classList.contains("copy-btn-copied") === false) {
+    let copyBtnClassList = document.getElementsByClassName("shorten-result-copy-btn");
+
+    for (i = 0; i < copyBtnClassList.length; i++) {
+      copyBtnClassList[i].classList.remove("copy-btn-copied");
+      copyBtnClassList[i].classList.add("copy-btn-default");
+      copyBtnClassList[i].innerHTML = "Copy";
+    }
+
+    btn.classList.remove("copy-btn-default");
+    btn.classList.add("copy-btn-copied");
+    btn.innerHTML = "Copied!";
+
+    var tempInput = document.createElement("INPUT");
+    tempInput.value = btn.previousSibling.children[0].innerHTML;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+  }
 }
 
 
