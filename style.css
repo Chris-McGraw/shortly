@@ -616,12 +616,19 @@ nav {
   font-weight: 500;
   color: var(--main-white);
 
-  background-color: var(--main-cyan);
   border-radius: 5px;
 
   cursor: pointer;
 
   /* transition: background-color 200ms ease-in; */
+}
+
+.copy-btn-default {
+  background-color: var(--main-cyan);
+}
+
+.copy-btn-copied {
+  background-color: var(--main-dark-violet);
 }
 
 #stats h2 {
@@ -953,7 +960,7 @@ nav {
     color: #9ce2e2 !important;
   }
 
-  .shorten-result-copy-btn:hover {
+  .copy-btn-default:hover {
     background-color: #9ce2e2;
   }
 
