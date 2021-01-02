@@ -61,7 +61,7 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
 // --
 
     createShortenResultOriginal(shortenResultTileInner, data);
-    createShortenResultAccentLine(shortenResultTile);
+    createShortenResultAccentLine(shortenResultTile, data);
     createShortenResultLinkContainer(shortenResultTileInner, data);
   });
 }
@@ -70,7 +70,15 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
 function createShortenResultOriginal(shortenResultTileInner, data) {
   var shortenResultOriginal = document.createElement("P");
   shortenResultOriginal.classList.add("shorten-result-original");
-  shortenResultOriginal.appendChild( document.createTextNode(data.result.original_link) );
+
+  if(data.ok === true) {
+    shortenResultOriginal.appendChild( document.createTextNode(data.result.original_link) );
+  }
+  else {
+    shortenResultOriginal.classList.add("shorten-result-original-error");
+    shortenResultOriginal.appendChild( document.createTextNode("ERROR:") );
+  }
+
   shortenResultTileInner.appendChild(shortenResultOriginal);
 
   setTimeout(function() {
@@ -79,14 +87,16 @@ function createShortenResultOriginal(shortenResultTileInner, data) {
 }
 
 
-function createShortenResultAccentLine(shortenResultTile) {
-  var shortenResultAccentLine = document.createElement("DIV");
-  shortenResultAccentLine.classList.add("shorten-result-accent-line");
-  shortenResultTile.appendChild(shortenResultAccentLine);
+function createShortenResultAccentLine(shortenResultTile, data) {
+  if(data.ok === true) {
+    var shortenResultAccentLine = document.createElement("DIV");
+    shortenResultAccentLine.classList.add("shorten-result-accent-line");
+    shortenResultTile.appendChild(shortenResultAccentLine);
 
-  setTimeout(function() {
-    shortenResultAccentLine.classList.add("shorten-result-fade-in");
-  }, 300);
+    setTimeout(function() {
+      shortenResultAccentLine.classList.add("shorten-result-fade-in");
+    }, 300);
+  }
 }
 
 
@@ -95,44 +105,58 @@ function createShortenResultLinkContainer(shortenResultTileInner, data) {
   shortenResultLinkContainer.classList.add("shorten-result-link-container");
   shortenResultTileInner.appendChild(shortenResultLinkContainer);
 
-  var shortenResultLinkContainerInner = document.createElement("DIV");
-  shortenResultLinkContainerInner.classList.add("shorten-result-link-container-inner");
-  shortenResultLinkContainer.appendChild(shortenResultLinkContainerInner);
+// --
 
-  var shortenResultLink = document.createElement("A");
-  shortenResultLink.href = data.result.full_short_link;
-  shortenResultLink.setAttribute("target", "_blank");
-  shortenResultLink.classList.add("shorten-result-link");
-  shortenResultLink.appendChild( document.createTextNode(data.result.full_short_link) );
-  shortenResultLinkContainerInner.appendChild(shortenResultLink);
+  if(data.ok === true) {
+    var shortenResultLinkContainerInner = document.createElement("DIV");
+    shortenResultLinkContainerInner.classList.add("shorten-result-link-container-inner");
+    shortenResultLinkContainer.appendChild(shortenResultLinkContainerInner);
 
-  var shortenResultCopyBtn = document.createElement("BUTTON");
-  shortenResultCopyBtn.classList.add("shorten-result-copy-btn", "copy-btn-default");
-  shortenResultCopyBtn.appendChild( document.createTextNode("Copy") );
+    var shortenResultLink = document.createElement("A");
+    shortenResultLink.href = data.result.full_short_link;
+    shortenResultLink.setAttribute("target", "_blank");
+    shortenResultLink.classList.add("shorten-result-link");
+    shortenResultLink.appendChild( document.createTextNode(data.result.full_short_link) );
+    shortenResultLinkContainerInner.appendChild(shortenResultLink);
+
+    var shortenResultCopyBtn = document.createElement("BUTTON");
+    shortenResultCopyBtn.classList.add("shorten-result-copy-btn", "copy-btn-default");
+    shortenResultCopyBtn.appendChild( document.createTextNode("Copy") );
 
 // --
 
-  shortenResultCopyBtn.addEventListener("mousedown", function() {
-    this.style.outlineWidth = "0";
-  });
+    shortenResultCopyBtn.addEventListener("mousedown", function() {
+      this.style.outlineWidth = "0";
+    });
 
-  shortenResultCopyBtn.addEventListener("mouseup", function() {
-    this.blur();
-    this.style.outlineWidth = "initial";
-  });
+    shortenResultCopyBtn.addEventListener("mouseup", function() {
+      this.blur();
+      this.style.outlineWidth = "initial";
+    });
 
-  shortenResultCopyBtn.addEventListener("mouseleave", function() {
-    this.blur();
-    this.style.outlineWidth = "initial";
-  });
+    shortenResultCopyBtn.addEventListener("mouseleave", function() {
+      this.blur();
+      this.style.outlineWidth = "initial";
+    });
 
-  shortenResultCopyBtn.addEventListener("click", function() {
-    copyShortenedLink(this);
-  });
+    shortenResultCopyBtn.addEventListener("click", function() {
+      copyShortenedLink(this);
+    });
+
+    shortenResultLinkContainer.appendChild(shortenResultCopyBtn);
+  }
+  else {
+    var shortenResultLinkErrorContainerInner = document.createElement("DIV");
+    shortenResultLinkErrorContainerInner.classList.add("shorten-result-link-error-container-inner");
+    shortenResultLinkContainer.appendChild(shortenResultLinkErrorContainerInner);
+
+    var shortenResultLinkError = document.createElement("P");
+    shortenResultLinkError.classList.add("shorten-result-link", "shorten-result-link-error");
+    shortenResultLinkError.appendChild( document.createTextNode(data.error) );
+    shortenResultLinkErrorContainerInner.appendChild(shortenResultLinkError);
+  }
 
 // --
-
-  shortenResultLinkContainer.appendChild(shortenResultCopyBtn);
 
   setTimeout(function() {
     shortenResultLinkContainer.classList.add("shorten-result-fade-in");
