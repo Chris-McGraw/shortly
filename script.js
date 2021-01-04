@@ -43,7 +43,7 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
 // --
 
   let apiUrlEncoded = apiUrl.replace(/&/g, "%26");
-  console.log(apiUrlEncoded);
+  console.log("encoded URL = " + apiUrlEncoded);
 
   fetch("https://api.shrtco.de/v2/shorten?url=" + apiUrlEncoded)
   .then(function(response) {
@@ -51,6 +51,7 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
   })
   .then(function(data) {
     console.log(data);
+    console.log("");
 
     shortenResultLoadingSpinner.classList.remove("shorten-result-fade-in");
     setTimeout(function() {
@@ -58,11 +59,22 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
       shortenResultLoadingSpinner.style.display = "none";
     }, 300);
 
-// --
-
     createShortenResultOriginal(shortenResultTileInner, data);
     createShortenResultAccentLine(shortenResultTile, data);
     createShortenResultLinkContainer(shortenResultTileInner, data);
+  })
+  .catch(function(error) {
+    console.log(error);
+    console.log("");
+
+    shortenResultLoadingSpinner.classList.remove("shorten-result-fade-in");
+    setTimeout(function() {
+      shortenResultLoadingSpinner.classList.remove("rotate-loading-spinner");
+      shortenResultLoadingSpinner.style.display = "none";
+    }, 300);
+
+    createShortenResultOriginal(shortenResultTileInner);
+    createShortenResultLinkContainer(shortenResultTileInner);
   });
 }
 
@@ -71,7 +83,7 @@ function createShortenResultOriginal(shortenResultTileInner, data) {
   var shortenResultOriginal = document.createElement("P");
   shortenResultOriginal.classList.add("shorten-result-original");
 
-  if(data.ok === true) {
+  if(data && data.ok) {
     shortenResultOriginal.appendChild( document.createTextNode(data.result.original_link) );
   }
   else {
@@ -88,7 +100,7 @@ function createShortenResultOriginal(shortenResultTileInner, data) {
 
 
 function createShortenResultAccentLine(shortenResultTile, data) {
-  if(data.ok === true) {
+  if(data && data.ok) {
     var shortenResultAccentLine = document.createElement("DIV");
     shortenResultAccentLine.classList.add("shorten-result-accent-line");
     shortenResultTile.appendChild(shortenResultAccentLine);
@@ -107,7 +119,7 @@ function createShortenResultLinkContainer(shortenResultTileInner, data) {
 
 // --
 
-  if(data.ok === true) {
+  if(data && data.ok) {
     var shortenResultLinkContainerInner = document.createElement("DIV");
     shortenResultLinkContainerInner.classList.add("shorten-result-link-container-inner");
     shortenResultLinkContainer.appendChild(shortenResultLinkContainerInner);
@@ -152,7 +164,14 @@ function createShortenResultLinkContainer(shortenResultTileInner, data) {
 
     var shortenResultLinkError = document.createElement("P");
     shortenResultLinkError.classList.add("shorten-result-link", "shorten-result-link-error");
-    shortenResultLinkError.appendChild( document.createTextNode(data.error) );
+
+    if(data && data.error) {
+      shortenResultLinkError.appendChild( document.createTextNode(data.error) );
+    }
+    else {
+      shortenResultLinkError.appendChild( document.createTextNode("A network error has occurred, please try again later") );
+    }
+
     shortenResultLinkErrorContainerInner.appendChild(shortenResultLinkError);
   }
 
@@ -262,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   document.getElementById("shorten-submit").addEventListener("click", function() {
-    console.log( checkValidUrl(document.getElementById("shorten-input").value) );
+    console.log( "valid URL = " + checkValidUrl(document.getElementById("shorten-input").value) );
 
     if(checkValidUrl(document.getElementById("shorten-input").value) === true) {
       createShortenResultTile(document.getElementById("shorten-input").value);
