@@ -43,7 +43,7 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
 // --
 
   let apiUrlEncoded = apiUrl.replace(/&/g, "%26");
-  console.log(apiUrlEncoded);
+  console.log("encoded URL = " + apiUrlEncoded);
 
   fetch("https://api.shrtco.de/v2/shorten?url=" + apiUrlEncoded)
   .then(function(response) {
@@ -51,6 +51,7 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
   })
   .then(function(data) {
     console.log(data);
+    console.log("");
 
     shortenResultLoadingSpinner.classList.remove("shorten-result-fade-in");
     setTimeout(function() {
@@ -58,11 +59,22 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
       shortenResultLoadingSpinner.style.display = "none";
     }, 300);
 
-// --
-
     createShortenResultOriginal(shortenResultTileInner, data);
-    createShortenResultAccentLine(shortenResultTile);
+    createShortenResultAccentLine(shortenResultTile, data);
     createShortenResultLinkContainer(shortenResultTileInner, data);
+  })
+  .catch(function(error) {
+    console.log(error);
+    console.log("");
+
+    shortenResultLoadingSpinner.classList.remove("shorten-result-fade-in");
+    setTimeout(function() {
+      shortenResultLoadingSpinner.classList.remove("rotate-loading-spinner");
+      shortenResultLoadingSpinner.style.display = "none";
+    }, 300);
+
+    createShortenResultOriginal(shortenResultTileInner);
+    createShortenResultLinkContainer(shortenResultTileInner);
   });
 }
 
@@ -70,7 +82,16 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
 function createShortenResultOriginal(shortenResultTileInner, data) {
   var shortenResultOriginal = document.createElement("P");
   shortenResultOriginal.classList.add("shorten-result-original");
-  shortenResultOriginal.appendChild( document.createTextNode(data.result.original_link) );
+
+  if(data && data.ok) {
+    let lowerBaseUrl = new URL(data.result.original_link);
+    shortenResultOriginal.appendChild(document.createTextNode( lowerBaseUrl.href.replace(/\/$/, "") ));
+  }
+  else {
+    shortenResultOriginal.classList.add("shorten-result-original-error");
+    shortenResultOriginal.appendChild( document.createTextNode("ERROR:") );
+  }
+
   shortenResultTileInner.appendChild(shortenResultOriginal);
 
   setTimeout(function() {
@@ -79,14 +100,16 @@ function createShortenResultOriginal(shortenResultTileInner, data) {
 }
 
 
-function createShortenResultAccentLine(shortenResultTile) {
-  var shortenResultAccentLine = document.createElement("DIV");
-  shortenResultAccentLine.classList.add("shorten-result-accent-line");
-  shortenResultTile.appendChild(shortenResultAccentLine);
+function createShortenResultAccentLine(shortenResultTile, data) {
+  if(data && data.ok) {
+    var shortenResultAccentLine = document.createElement("DIV");
+    shortenResultAccentLine.classList.add("shorten-result-accent-line");
+    shortenResultTile.appendChild(shortenResultAccentLine);
 
-  setTimeout(function() {
-    shortenResultAccentLine.classList.add("shorten-result-fade-in");
-  }, 300);
+    setTimeout(function() {
+      shortenResultAccentLine.classList.add("shorten-result-fade-in");
+    }, 300);
+  }
 }
 
 
@@ -95,44 +118,65 @@ function createShortenResultLinkContainer(shortenResultTileInner, data) {
   shortenResultLinkContainer.classList.add("shorten-result-link-container");
   shortenResultTileInner.appendChild(shortenResultLinkContainer);
 
-  var shortenResultLinkContainerInner = document.createElement("DIV");
-  shortenResultLinkContainerInner.classList.add("shorten-result-link-container-inner");
-  shortenResultLinkContainer.appendChild(shortenResultLinkContainerInner);
+// --
 
-  var shortenResultLink = document.createElement("A");
-  shortenResultLink.href = data.result.full_short_link;
-  shortenResultLink.setAttribute("target", "_blank");
-  shortenResultLink.classList.add("shorten-result-link");
-  shortenResultLink.appendChild( document.createTextNode(data.result.full_short_link) );
-  shortenResultLinkContainerInner.appendChild(shortenResultLink);
+  if(data && data.ok) {
+    var shortenResultLinkContainerInner = document.createElement("DIV");
+    shortenResultLinkContainerInner.classList.add("shorten-result-link-container-inner");
+    shortenResultLinkContainer.appendChild(shortenResultLinkContainerInner);
 
-  var shortenResultCopyBtn = document.createElement("BUTTON");
-  shortenResultCopyBtn.classList.add("shorten-result-copy-btn", "copy-btn-default");
-  shortenResultCopyBtn.appendChild( document.createTextNode("Copy") );
+    var shortenResultLink = document.createElement("A");
+    shortenResultLink.href = data.result.full_short_link;
+    shortenResultLink.setAttribute("target", "_blank");
+    shortenResultLink.classList.add("shorten-result-link");
+    shortenResultLink.appendChild( document.createTextNode(data.result.full_short_link) );
+    shortenResultLinkContainerInner.appendChild(shortenResultLink);
+
+    var shortenResultCopyBtn = document.createElement("BUTTON");
+    shortenResultCopyBtn.classList.add("shorten-result-copy-btn", "copy-btn-default");
+    shortenResultCopyBtn.appendChild( document.createTextNode("Copy") );
 
 // --
 
-  shortenResultCopyBtn.addEventListener("mousedown", function() {
-    this.style.outlineWidth = "0";
-  });
+    shortenResultCopyBtn.addEventListener("mousedown", function() {
+      this.style.outlineWidth = "0";
+    });
 
-  shortenResultCopyBtn.addEventListener("mouseup", function() {
-    this.blur();
-    this.style.outlineWidth = "initial";
-  });
+    shortenResultCopyBtn.addEventListener("mouseup", function() {
+      this.blur();
+      this.style.outlineWidth = "initial";
+    });
 
-  shortenResultCopyBtn.addEventListener("mouseleave", function() {
-    this.blur();
-    this.style.outlineWidth = "initial";
-  });
+    shortenResultCopyBtn.addEventListener("mouseleave", function() {
+      this.blur();
+      this.style.outlineWidth = "initial";
+    });
 
-  shortenResultCopyBtn.addEventListener("click", function() {
-    copyShortenedLink(this);
-  });
+    shortenResultCopyBtn.addEventListener("click", function() {
+      copyShortenedLink(this);
+    });
+
+    shortenResultLinkContainer.appendChild(shortenResultCopyBtn);
+  }
+  else {
+    var shortenResultLinkErrorContainerInner = document.createElement("DIV");
+    shortenResultLinkErrorContainerInner.classList.add("shorten-result-link-error-container-inner");
+    shortenResultLinkContainer.appendChild(shortenResultLinkErrorContainerInner);
+
+    var shortenResultLinkError = document.createElement("P");
+    shortenResultLinkError.classList.add("shorten-result-link", "shorten-result-link-error");
+
+    if(data && data.error) {
+      shortenResultLinkError.appendChild( document.createTextNode(data.error) );
+    }
+    else {
+      shortenResultLinkError.appendChild( document.createTextNode("A network error has occurred, please try again later") );
+    }
+
+    shortenResultLinkErrorContainerInner.appendChild(shortenResultLinkError);
+  }
 
 // --
-
-  shortenResultLinkContainer.appendChild(shortenResultCopyBtn);
 
   setTimeout(function() {
     shortenResultLinkContainer.classList.add("shorten-result-fade-in");
@@ -141,9 +185,9 @@ function createShortenResultLinkContainer(shortenResultTileInner, data) {
 
 
 function checkValidUrl(str) {
-  regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+  regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i;
 
-  if (regexp.test(str)) {
+  if(regexp.test(str)) {
     return true
   }
   else {
@@ -238,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   document.getElementById("shorten-submit").addEventListener("click", function() {
-    console.log( checkValidUrl(document.getElementById("shorten-input").value) );
+    console.log( "valid URL = " + checkValidUrl(document.getElementById("shorten-input").value) );
 
     if(checkValidUrl(document.getElementById("shorten-input").value) === true) {
       createShortenResultTile(document.getElementById("shorten-input").value);

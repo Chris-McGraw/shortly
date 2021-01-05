@@ -565,6 +565,12 @@ nav {
   transition: opacity 300ms ease-in;
 }
 
+.shorten-result-original-error {
+  font-style: italic !important;
+  font-weight: 700 !important;
+  color: var(--secondary-red) !important;
+}
+
 .shorten-result-accent-line {
   display: none;
 }
@@ -605,6 +611,22 @@ nav {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.shorten-result-link-error-container-inner {
+  position: absolute;
+
+  width: 205%;
+}
+
+.shorten-result-link-error {
+  width: 100% !important;
+  padding-top: 0 !important;
+
+  line-height: normal !important;
+  text-align: right !important;
+  font-style: italic !important;
+  color: var(--secondary-red) !important;
 }
 
 .shorten-result-copy-btn {
@@ -964,6 +986,10 @@ nav {
     color: #9ce2e2 !important;
   }
 
+  .shorten-result-link-error:hover {
+    color: var(--secondary-red) !important;
+  }
+
   .copy-btn-default:hover {
     background-color: #9ce2e2;
   }
@@ -1314,6 +1340,24 @@ nav {
 
   .shorten-result-link {
     font-size: 15px !important;
+  }
+
+  .shorten-result-link-error-container-inner {
+    position: relative;
+
+    width: 100%;
+    height: 100px;
+  }
+
+  .shorten-result-link-error {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: clip;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+
+    text-align: left !important;
   }
 
   .shorten-result-copy-btn {
