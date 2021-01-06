@@ -216,8 +216,6 @@ function validUrlFail() {
 
 
 function copyShortenedLink(btn) {
-  // console.log( btn.classList.contains("copy-btn-copied") );
-
   if(btn.classList.contains("copy-btn-copied") === false) {
     let copyBtnClassList = document.getElementsByClassName("shorten-result-copy-btn");
 
@@ -230,14 +228,14 @@ function copyShortenedLink(btn) {
     btn.classList.remove("copy-btn-default");
     btn.classList.add("copy-btn-copied");
     btn.innerHTML = "Copied!";
-
-    var tempInput = document.createElement("INPUT");
-    tempInput.value = btn.previousSibling.children[0].innerHTML;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
   }
+
+  var tempInput = document.createElement("INPUT");
+  tempInput.value = btn.previousSibling.children[0].innerHTML;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
 }
 
 
