@@ -1,4 +1,41 @@
 /* ------------------------- FUNCTION DECLARATIONS ------------------------- */
+function initializeLocalStorage() {
+  // localStorage.removeItem("shortlyLocalStorage");
+  // console.log("SHORTLY LOCAL STORAGE CLEARED!");
+
+  if(localStorage.getItem("shortlyLocalStorage") !== null) {
+    for (i = JSON.parse(localStorage.getItem("shortlyLocalStorage")).length - 1; i >= 0; i--) {
+      var shortenResultTile = document.createElement("DIV");
+      shortenResultTile.classList.add("shorten-result-tile");
+
+      var shortenResultTileInner = document.createElement("DIV");
+      shortenResultTileInner.classList.add("shorten-result-tile-inner");
+      shortenResultTile.appendChild(shortenResultTileInner);
+
+      document.getElementById("shorten-results-container").prepend(shortenResultTile);
+
+      let resultTileList = document.getElementsByClassName("shorten-result-tile");
+
+      setTimeout(function() {
+        for (i = resultTileList.length - 1; i >= 0; i--) {
+          resultTileList[i].classList.add("shorten-result-tile-transition", "shorten-result-tile-expand");
+        }
+      },  0);
+
+      setTimeout(function() {
+        for (i = resultTileList.length - 1; i >= 0; i--) {
+          resultTileList[i].classList.remove("shorten-result-tile-transition");
+        }
+      }, 300);
+
+      createShortenResultOriginal( shortenResultTileInner, JSON.parse(localStorage.getItem("shortlyLocalStorage"))[i] );
+      createShortenResultAccentLine( shortenResultTile, JSON.parse(localStorage.getItem("shortlyLocalStorage"))[i] );
+      createShortenResultLinkContainer( shortenResultTileInner, JSON.parse(localStorage.getItem("shortlyLocalStorage"))[i] );
+    }
+  }
+}
+
+
 function toggleDropdownActive() {
   document.getElementById("dropdown-nav").classList.toggle("dropdown-active");
 }
@@ -27,6 +64,21 @@ function createShortenResultTile(apiUrl) {
   setTimeout(function() {
     shortenResultTile.classList.remove("shorten-result-tile-transition");
   }, 300);
+
+// --
+
+  checkResultTileListLength();
+}
+
+
+function checkResultTileListLength() {
+  let resultTileList = document.getElementsByClassName("shorten-result-tile");
+
+  if(resultTileList.length > 5) {
+    setTimeout(function() {
+      resultTileList[5].remove();
+    }, 600);
+  }
 }
 
 
@@ -62,6 +114,8 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
     createShortenResultOriginal(shortenResultTileInner, data);
     createShortenResultAccentLine(shortenResultTile, data);
     createShortenResultLinkContainer(shortenResultTileInner, data);
+
+    addResultToLocalStorage(data);
   })
   .catch(function(error) {
     console.log(error);
@@ -184,6 +238,34 @@ function createShortenResultLinkContainer(shortenResultTileInner, data) {
 }
 
 
+function addResultToLocalStorage(data) {
+  if(data && data.ok) {
+    if(localStorage.getItem("shortlyLocalStorage") === null) {
+      let emptyArr = [];
+      localStorage.setItem( "shortlyLocalStorage", JSON.stringify(emptyArr) );
+    }
+
+    let shortlyLocalStorageNew = JSON.parse(localStorage.getItem("shortlyLocalStorage"));
+
+    let newData = {
+      ok: true,
+      result: {
+        original_link: data.result.original_link,
+        full_short_link: data.result.full_short_link
+      }
+    }
+
+    shortlyLocalStorageNew.unshift(newData);
+
+    if( JSON.parse(localStorage.getItem("shortlyLocalStorage")).length >= 5 ) {
+      shortlyLocalStorageNew.pop();
+    }
+
+    localStorage.setItem("shortlyLocalStorage", JSON.stringify(shortlyLocalStorageNew));
+  }
+}
+
+
 function checkValidUrl(str) {
   regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i;
 
@@ -216,8 +298,6 @@ function validUrlFail() {
 
 
 function copyShortenedLink(btn) {
-  // console.log( btn.classList.contains("copy-btn-copied") );
-
   if(btn.classList.contains("copy-btn-copied") === false) {
     let copyBtnClassList = document.getElementsByClassName("shorten-result-copy-btn");
 
@@ -230,14 +310,14 @@ function copyShortenedLink(btn) {
     btn.classList.remove("copy-btn-default");
     btn.classList.add("copy-btn-copied");
     btn.innerHTML = "Copied!";
-
-    var tempInput = document.createElement("INPUT");
-    tempInput.value = btn.previousSibling.children[0].innerHTML;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
   }
+
+  var tempInput = document.createElement("INPUT");
+  tempInput.value = btn.previousSibling.children[0].innerHTML;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
 }
 
 
@@ -246,6 +326,9 @@ function copyShortenedLink(btn) {
 
 /* ----------------------------- EVENT HANDLERS ----------------------------- */
 document.addEventListener("DOMContentLoaded", function() {
+  initializeLocalStorage();
+
+/* ----- */
 
   document.getElementById("hamburger-menu").addEventListener("mousedown", function() {
     this.style.outlineWidth = "0";
@@ -295,6 +378,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 /* ----- */
+
   document.getElementById("facebook-link").addEventListener("mouseenter", function() {
     this.children[0].src = "imgs/icon-facebook-cyan.svg";
   });

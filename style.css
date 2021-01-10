@@ -473,9 +473,11 @@ nav {
 #shorten-results-container {
   width: 100%;
   height: auto;
+  max-height: 445px;
   margin-bottom: 120px;
 
   /* border: 1px dashed red; */
+  overflow: hidden;
 }
 
 .shorten-result-tile {
@@ -1272,6 +1274,7 @@ nav {
 /* ----- */
 
   #shorten-results-container {
+    max-height: 900px;
     margin-bottom: 82px;
   }
 
