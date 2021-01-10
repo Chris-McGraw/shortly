@@ -95,15 +95,15 @@ function fetchApiData(shortenResultTile, shortenResultTileInner, apiUrl) {
 // --
 
   let apiUrlEncoded = apiUrl.replace(/&/g, "%26");
-  console.log("encoded URL = " + apiUrlEncoded);
+  // console.log("encoded URL = " + apiUrlEncoded);
 
   fetch("https://api.shrtco.de/v2/shorten?url=" + apiUrlEncoded)
   .then(function(response) {
     return response.json();
   })
   .then(function(data) {
-    console.log(data);
-    console.log("");
+    // console.log(data);
+    // console.log("");
 
     shortenResultLoadingSpinner.classList.remove("shorten-result-fade-in");
     setTimeout(function() {
@@ -365,7 +365,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   document.getElementById("shorten-submit").addEventListener("click", function() {
-    console.log( "valid URL = " + checkValidUrl(document.getElementById("shorten-input").value) );
+    // console.log( "valid URL = " + checkValidUrl(document.getElementById("shorten-input").value) );
 
     if(checkValidUrl(document.getElementById("shorten-input").value) === true) {
       createShortenResultTile(document.getElementById("shorten-input").value);
