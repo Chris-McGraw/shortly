@@ -148,6 +148,8 @@ nav {
 } */
 
 .hamburger-bar {
+  display: block;
+
   position: relative;
   left: 0;
   right: 0;
@@ -156,9 +158,8 @@ nav {
   height: 3px;
 
   background-color: var(--neutral-grayish-violet);
-  cursor: pointer;
 
-  transition: transform 300ms ease-in-out, width 300ms ease-in-out, opacity 300ms ease-in-out;
+  cursor: pointer;
 }
 
 .hamburger-bar-middle {
